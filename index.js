@@ -89,7 +89,10 @@ async function updateGist(stats) {
     return request('PATCH /gists/:gist_id', {
         files: {
             [filename]: {
-                filename: `${stats.name}'s GitHub Stats`,
+                filename: `${stats.name ? stats.name.endsWith("s")
+          ? `${`${stats.name}'`}`
+          : `${`${stats.name}'s`}`
+        : ""} GitHub Stats`,
                 content: gistContent,
             },
         },
